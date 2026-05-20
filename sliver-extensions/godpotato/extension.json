@@ -1,0 +1,38 @@
+{
+    "name": "godpotato",
+    "command_name": "godpotato",
+    "extension_author": "ScotSec",
+    "original_author": "incursi0n",
+    "repo_url": "",
+    "help": "GodPotato BOF - elevate to SYSTEM and run a command or impersonate Beacon",
+    "long_help": "Elevates to NT AUTHORITY\\SYSTEM using the GodPotato technique (COM/RPC dispatch table hook).\n\nRequires SeImpersonatePrivilege.\n\nModes:\n  (no args)                        Run 'cmd /c whoami' as SYSTEM\n  -- -cmd token                        Apply SYSTEM token to the current Beacon session via BeaconUseToken()\n  -- -cmd \"<command>\"                  Run a custom command as SYSTEM\n  -- -cmd \"<command>\" -pipe <name>     Custom command with a specific named pipe\n\nExamples:\n  godpotato\n  godpotato -- -cmd token\n  godpotato -- -cmd \"whoami /all\"\n  godpotato -- -cmd \"cmd /c net user hax P@ss /add\"\n  godpotato -- -cmd \"cmd /c whoami\" -pipe mypipe",
+    "depends_on": "coff-loader",
+    "entrypoint": "go",
+    "init": "",
+    "files": [
+        {
+            "os": "windows",
+            "arch": "amd64",
+            "path": "BOF.x64.o"
+        },
+        {
+            "os": "windows",
+            "arch": "386",
+            "path": "BOF.x86.o"
+        }
+    ],
+    "arguments": [
+        {
+            "name": "cmd",
+            "desc": "Command to run as SYSTEM, or 'token' to apply SYSTEM token to Beacon. Defaults to 'cmd /c whoami' if omitted.",
+            "type": "string",
+            "optional": true
+        },
+        {
+            "name": "pipe",
+            "desc": "Custom named pipe name. Auto-generated if omitted.",
+            "type": "string",
+            "optional": true
+        }
+    ]
+}
