@@ -15,6 +15,9 @@ Triggers the GodPotato privilege escalation flow (COM/RPC dispatch table hook) t
 ```bash
 chmod +x install.sh
 ./install.sh
+
+# Note: If you get a bad interpreter error in your shell when running the install script, run the following:
+dos2unix install.sh
 ```
 
 The installer will:
